@@ -33,6 +33,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Versions
 
-Node.js -> v16.16.0
-npm -> 8.11.0
-React -> 8.2.0
+Node.js -> v16.16.0  
+npm -> 8.11.0  
+React -> 8.2.0  
+Sass -> 1.54.1  
