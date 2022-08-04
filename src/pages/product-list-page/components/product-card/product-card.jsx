@@ -8,14 +8,14 @@ const ProductCard = (props) => {
     <div className="product-card">
       <Link className="product-card__link" to={`/${product.id}`}>
         <div className="product-card__link__image">
-          <img src={ require(`../../../../assets/img/${product.imagen}`)} alt={product.id} />
+          <img src={product.imgUrl} alt={product.id} />
           
         </div>
         <div className="product-card__link__info">
           <div>
-            <div>{`Marca: ${product.marca}`}</div>
-            <div>{`Modelo: ${product.modelo}`}</div>
-            <div>{`Precio: ${product.precio}€`}</div>
+            <div>{`Marca: ${product.brand}`}</div>
+            <div>{`Modelo: ${product.model}`}</div>
+            <div>{`Precio: ${product.price} €`}</div>
           </div>
         </div>
       </Link>
