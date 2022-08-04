@@ -1,1 +1,32 @@
 
+@import "../../assets/styles/colors.scss";
+
+.product-detail-page {
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 24px;
+
+    display: flex;
+    background-color: $bg-dark-gray;
+    margin: 10% 10% 10% 10%;
+
+    &__image {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+    }
+    &__info {
+        width: 50%;
+        &__description {
+            &__title {
+                font-weight: 700;
+                font-size: 34px;
+            }
+            &__text {
+                font-weight: 700;
+                font-size: 24px;
+            }
+        }
+    }
+    
+}
