@@ -11,5 +11,13 @@
     &__link {
         text-decoration: none;
         color: $text-black;
+        &__image {
+            display: flex;
+            justify-content: center;
+        }
+        &__info {
+            display: flex;
+            justify-content: center;
+        }
     }
 }

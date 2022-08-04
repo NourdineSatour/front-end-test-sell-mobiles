@@ -9,98 +9,98 @@ const ProductListPage = () => {
   const products = [
     {
       id: "0001",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "150"
     },
     {
       id: "0002",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone 2",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0003",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X13d",
       precio: "145"
     },
     {
       id: "0004",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Woto",
       modelo: "sadas",
       precio: "145"
     },
     {
       id: "0005",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Xacsa",
       modelo: "Asdas",
       precio: "150"
     },
     {
       id: "0006",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0007",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0008",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0009",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0010",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0011",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0012",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0013",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
     },
     {
       id: "0014",
-      imagen: "",
+      imagen: "imagen.png",
       marca: "Samphone",
       modelo: "X1317",
       precio: "145"
