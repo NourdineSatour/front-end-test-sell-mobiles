@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import ProductCard from './components/product-card/product-card';
 import './product-list-page.scss';
 
 const ProductListPage = () => {
+  
+  const [searchValue, setSearchValue] = useState("");
 
   const products = [
     {
@@ -9,7 +12,7 @@ const ProductListPage = () => {
       imagen: "",
       marca: "Samphone",
       modelo: "X1317",
-      precio: "145"
+      precio: "150"
     },
     {
       id: "0002",
@@ -37,7 +40,7 @@ const ProductListPage = () => {
       imagen: "",
       marca: "Xacsa",
       modelo: "Asdas",
-      precio: "145"
+      precio: "150"
     },
     {
       id: "0006",
@@ -103,14 +106,22 @@ const ProductListPage = () => {
       precio: "145"
     },
   ];
+
+  const [productsList, setProductsList] = useState(products);
+
+  const handleSearch = (value) => {
+    setSearchValue(value.target.value);
+    const productsListFiltered = products.filter(product => ( product.marca.toString().toLowerCase().includes(value.target.value.toString().toLowerCase()) || product.modelo.toString().toLowerCase().includes(value.target.value.toString().toLowerCase()) ));
+    setProductsList(productsListFiltered);
+  }
   return (
     <div className="product-list-page">
       <div className="product-list-page__header">
         <div className="product-list-page__header__title">Products</div>
-        <div className="product-list-page__header__search">Search field</div>
+        <input className="product-list-page__header__search" type="text" value={searchValue} onChange={handleSearch} />
       </div>
       <div className="product-list-page__products">
-        {products && products.map((elem, index)=> {
+        {productsList && productsList.map((elem, index)=> {
           return (
             <ProductCard key={index} product={elem}></ProductCard>
           )
