@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
-import imagen from "../../../../assets/img/imagen.png"
 import './product-card.scss';
 
 const ProductCard = (props) => {
   const { product } = props
-  console.log("imagen",imagen)
 
   return (
     <div className="product-card">
