@@ -1,0 +1,15 @@
+@import "../../../../assets/styles/colors.scss";
+
+.product-card {
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 24px;
+
+    width: 22%;
+    border: 1px #000000 solid;
+    margin: 1%;
+    &__link {
+        text-decoration: none;
+        color: $text-black;
+    }
+}
