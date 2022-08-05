@@ -24,6 +24,27 @@ const ProductDetailPage = (props) => {
   const handleClick = () => {
     console.log("handleClick storageSelected", storageSelected)
     console.log("handleClick colorSelected", colorSelected)
+    var sendData = JSON.stringify({
+      id: product.id,
+      colorCode: colorSelected.value,
+      storageCode: storageSelected.value
+     }) 
+    console.log("handleClick", sendData)
+
+    fetch(`https://front-test-api.herokuapp.com/api/cart`, {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: sendData
+    })
+    .then(res => res.json())
+    .then(
+      (result) => {
+        console.log("result", result)
+      },
+      (error) => {
+        console.log("error", error)
+      }
+    );
   }
 
 
