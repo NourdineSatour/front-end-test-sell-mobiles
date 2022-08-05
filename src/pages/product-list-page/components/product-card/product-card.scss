@@ -6,8 +6,10 @@
     font-size: 24px;
 
     width: 22%;
-    border: 1px #000000 solid;
+    border: 1px $bg-black solid;
     margin: 1%;
+    border-radius: 7px;
+    background: $primary-white;
     &__link {
         text-decoration: none;
         color: $text-black;
