@@ -21,7 +21,6 @@ const ProductListPage = () => {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log("result", result);
           setProducts(result);
           setProductsList(result);
         },
