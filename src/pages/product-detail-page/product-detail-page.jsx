@@ -1,50 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./product-detail-page.scss"
 
 const ProductDetailPage = (props) => {
   const params = useParams();
-
-  const product = {
-    id: "0001",
-    imagen: "imagen.png",
-
-    brand: "Samphone",
-    modelo: "X1317",
-    precio: "150",
-    cpu: "cpu-7",
-    ram: "ram-x47",
-    sistemaOperativo: "SO-76",
-    resolucion: "1400x800",
-    bateria: "4000",
-    camaras: "120",
-    dimensiones: "15x8",
-    peso: "800"
-  };
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
-    console.log("params", params);
-  }, [params]);
+    fetch(`https://front-test-api.herokuapp.com/api/product/${params.idDetail}`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setProduct(result)
+        },
+        (error) => {
+          console.log("error", error)
+        }
+      ).catch(error => {
+        console.log("error", error)
+      });
+  }, [params.idDetail])
 
   return (
     <div className="product-detail-page">      
       <div className="product-detail-page__image">
-        <img src={ require(`../../assets/img/${product.imagen}`)} alt={product.id} />
+        {/* <img src={ require(`../../assets/img/${product.imagen}`)} alt={product.id} /> */}
+        <img src={product.imgUrl} alt={product.id} />
       </div>
       <div className="product-detail-page__info">
         <div className="product-detail-page__info__description">
-          <div className="product-detail-page__info__description__title">Descripción del producto:</div>
-          <div className="product-detail-page__info__description__text">{`Marca: ${product.brand}`}</div>
-          <div className="product-detail-page__info__description__text">{`Modelo: ${product.modelo}`}</div>
-          <div className="product-detail-page__info__description__text">{`Precio: ${product.precio} €`}</div>
+          <div className="product-detail-page__info__description__title">Description:</div>
+          <div className="product-detail-page__info__description__text">{`Brand: ${product.brand}`}</div>
+          <div className="product-detail-page__info__description__text">{`Model: ${product.model}`}</div>
+          <div className="product-detail-page__info__description__text">{`Price: ${product.price} €`}</div>
           <div className="product-detail-page__info__description__text">{`CPU: ${product.cpu}`}</div>
           <div className="product-detail-page__info__description__text">{`RAM: ${product.ram}`}</div>
-          <div className="product-detail-page__info__description__text">{`Sistema Operativo: ${product.sistemaOperativo}`}</div>
-          <div className="product-detail-page__info__description__text">{`Resolución: ${product.resolucion}`}</div>
-          <div className="product-detail-page__info__description__text">{`Bateria: ${product.bateria} mAh`}</div>
-          <div className="product-detail-page__info__description__text">{`Camaras: ${product.camaras} MP`}</div>
-          <div className="product-detail-page__info__description__text">{`Dimensiones: ${product.dimensiones} cmxcm`}</div>
-          <div className="product-detail-page__info__description__text">{`Peso: ${product.peso} grs.`}</div>
+          <div className="product-detail-page__info__description__text">{`OS: ${product.os}`}</div>
+          <div className="product-detail-page__info__description__text">{`Resolution: ${product.displayResolution}`}</div>
+          <div className="product-detail-page__info__description__text">{`Battery: ${product.battery}`}</div>
+          <div className="product-detail-page__info__description__text">{`Primary camera: ${product.primaryCamera}`}</div>
+          <div className="product-detail-page__info__description__text">{`Secondary camera: ${product.secondaryCmera}`}</div>
+          <div className="product-detail-page__info__description__text">{`Display size: ${product.displaySize} `}</div>
+          {product.weight && <div className="product-detail-page__info__description__text">{`Weight: ${product.weight} grs.`}</div>}
+          
         </div>
         <div className="product-detail-page__info__actions">
           <div>Actions:</div>
