@@ -9,14 +9,23 @@ const ProductDetailPage = (props) => {
   const [product, setProduct] = useState({});
   const [storageOptions, setStorageOptions] = useState([]);
   const [colorOptions, setColorOptions] = useState([]);
+  const [storageSelected, setStorageSelected] = useState({});
+  const [colorSelected, setColorSelected] = useState({});
+  const [disabledButton, setDisabledButton] = useState(true);
 
   const handleSelectStorage = (value) => {
-    console.log("handleSelectStorage", value)
+    setStorageSelected(value)
   }
 
   const handleSelectColor = (value) => {
-    console.log("handleSelectColor", value)
+    setColorSelected(value)
   }
+
+  const handleClick = () => {
+    console.log("handleClick storageSelected", storageSelected)
+    console.log("handleClick colorSelected", colorSelected)
+  }
+
 
   const formatToSelect = (array) => {
     return array.map(storage =>{ return { value: storage.code, label: storage.name }});
@@ -28,7 +37,11 @@ const ProductDetailPage = (props) => {
       .then(
         (result) => {
           setStorageOptions(formatToSelect(result.options.storages));
+          if(result.options.storages.length === 1)
+            setStorageSelected(formatToSelect(result.options.storages)[0])
           setColorOptions(formatToSelect(result.options.colors));
+          if(result.options.colors.length === 1)
+            setColorSelected(formatToSelect(result.options.colors)[0])
           setProduct(result);
         },
         (error) => {
@@ -38,6 +51,14 @@ const ProductDetailPage = (props) => {
         console.log("error", error)
       });
   }, [params.idDetail])
+
+
+  useEffect(() => {
+    if(colorSelected.value && storageSelected.value)
+      setDisabledButton(false)
+    else
+      setDisabledButton(true)
+  }, [colorSelected, storageSelected])
 
   return (
     <div className="product-detail-page">      
@@ -65,20 +86,12 @@ const ProductDetailPage = (props) => {
         <div className="product-detail-page__info__actions">
           <div>Actions:</div>
           <div>Storage</div>
-          {
-            storageOptions.length === 1 ?
-            <Select options={storageOptions} value={storageOptions[0]} onChange={handleSelectStorage} />
-            :
-            <Select options={storageOptions} onChange={handleSelectStorage} />
-          }
-         
+          <Select options={storageOptions} value={storageSelected} onChange={handleSelectStorage} />
           <div>Color</div>
-          {
-            colorOptions.length === 1 ?
-            <Select options={colorOptions} value={colorOptions[0]} onChange={handleSelectColor} />
-            :
-           <Select options={colorOptions} onChange={handleSelectColor} />
-          }
+          <Select options={colorOptions} value={colorSelected} onChange={handleSelectColor} />
+          </div>
+          <div className="product-detail-page__info__wrapper-button">
+            <button className="product-detail-page__info__wrapper-button__button" disabled={disabledButton} onClick={handleClick}>Añadir al carro</button>
           </div>
       </div>
     </div>
