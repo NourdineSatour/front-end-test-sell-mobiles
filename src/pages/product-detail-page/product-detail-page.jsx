@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import "./product-detail-page.scss"
 
 const ProductDetailPage = (props) => {
@@ -24,23 +25,23 @@ const ProductDetailPage = (props) => {
   return (
     <div className="product-detail-page">      
       <div className="product-detail-page__image">
-        {/* <img src={ require(`../../assets/img/${product.imagen}`)} alt={product.id} /> */}
+        <Link className="product-detail-page__image__title" to="/"> Atrás </Link>
         <img src={product.imgUrl} alt={product.id} />
       </div>
       <div className="product-detail-page__info">
         <div className="product-detail-page__info__description">
           <div className="product-detail-page__info__description__title">Description:</div>
-          <div className="product-detail-page__info__description__text">{`Brand: ${product.brand}`}</div>
-          <div className="product-detail-page__info__description__text">{`Model: ${product.model}`}</div>
-          <div className="product-detail-page__info__description__text">{`Price: ${product.price} €`}</div>
-          <div className="product-detail-page__info__description__text">{`CPU: ${product.cpu}`}</div>
-          <div className="product-detail-page__info__description__text">{`RAM: ${product.ram}`}</div>
-          <div className="product-detail-page__info__description__text">{`OS: ${product.os}`}</div>
-          <div className="product-detail-page__info__description__text">{`Resolution: ${product.displayResolution}`}</div>
-          <div className="product-detail-page__info__description__text">{`Battery: ${product.battery}`}</div>
-          <div className="product-detail-page__info__description__text">{`Primary camera: ${product.primaryCamera}`}</div>
-          <div className="product-detail-page__info__description__text">{`Secondary camera: ${product.secondaryCmera}`}</div>
-          <div className="product-detail-page__info__description__text">{`Display size: ${product.displaySize} `}</div>
+          { product.brand && <div className="product-detail-page__info__description__text">{`Brand: ${product.brand}`}</div>}
+          { product.model && <div className="product-detail-page__info__description__text">{`Model: ${product.model}`}</div>}
+          { product.price && <div className="product-detail-page__info__description__text">{`Price: ${product.price} €`}</div>}
+          { product.cpu && <div className="product-detail-page__info__description__text">{`CPU: ${product.cpu}`}</div>}
+          { product.ram && <div className="product-detail-page__info__description__text">{`RAM: ${product.ram}`}</div>}
+          { product.os && <div className="product-detail-page__info__description__text">{`OS: ${product.os}`}</div>}
+          { product.displayResolution && <div className="product-detail-page__info__description__text">{`Resolution: ${product.displayResolution}`}</div>}
+          { product.battery && <div className="product-detail-page__info__description__text">{`Battery: ${product.battery}`}</div>}
+          { product.primaryCamera && <div className="product-detail-page__info__description__text">{`Primary camera: ${product.primaryCamera}`}</div>}
+          { product.secondaryCmera && <div className="product-detail-page__info__description__text">{`Secondary camera: ${product.secondaryCmera}`}</div>}
+          { product.displaySize && <div className="product-detail-page__info__description__text">{`Display size: ${product.displaySize} `}</div>}
           {product.weight && <div className="product-detail-page__info__description__text">{`Weight: ${product.weight} grs.`}</div>}
           
         </div>
