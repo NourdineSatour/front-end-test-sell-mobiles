@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
-import Select from 'react-select'
+import Select from 'react-select';
 import "./product-detail-page.scss"
 
 const ProductDetailPage = (props) => {
   const params = useParams();
+  const {cookies, setCookies, totalProducts, setTotalProducts} = props;
   const [product, setProduct] = useState({});
   const [storageOptions, setStorageOptions] = useState([]);
   const [colorOptions, setColorOptions] = useState([]);
@@ -22,24 +23,44 @@ const ProductDetailPage = (props) => {
   }
 
   const handleClick = () => {
-    console.log("handleClick storageSelected", storageSelected)
-    console.log("handleClick colorSelected", colorSelected)
     var sendData = JSON.stringify({
       id: product.id,
       colorCode: colorSelected.value,
       storageCode: storageSelected.value
      }) 
-    console.log("handleClick", sendData)
+
+    var nameOfCookie = product.id + colorSelected.value + storageSelected.value;
+
+    // localStorage.setItem('session', "ABC");
+    // console.log("localStorage", localStorage);
 
     fetch(`https://front-test-api.herokuapp.com/api/cart`, {
       method: 'POST', 
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': 'session_id=s%3A8aq5IUBPglIz-jXQcrewkp95oikB53Hx.uUnQ6vAarchAP0iU7rT1Q4OGL9AB13lJ3OX9phUF3dQ'
+    },
       body: sendData
     })
-    .then(res => res.json())
+    .then(res => console.log("res", res.headers.get('Cookie')))
     .then(
       (result) => {
-        console.log("result", result)
+        console.log(result)
+        if(cookies[nameOfCookie]){
+          setCookies(nameOfCookie, parseInt(cookies[nameOfCookie])+1)
+        } else {
+          setCookies(nameOfCookie, 1)
+        }
+
+        if(cookies.total){
+          setCookies("total", parseInt(cookies.total)+1)
+        } else {
+          setCookies("total", 1)
+        }
+
+        setTotalProducts(totalProducts+1);
+        
       },
       (error) => {
         console.log("error", error)
