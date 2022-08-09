@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductCard from './components/product-card/product-card';
 import './product-list-page.scss';
 
@@ -17,12 +17,19 @@ const ProductListPage = () => {
 
 
   useEffect(() => {
-    fetch("https://front-test-api.herokuapp.com/api/product")
+    var actually = new Date();
+    if(localStorage.getItem("expired") === null || actually.getTime()>localStorage.getItem("expired")){
+      console.log("llamada")
+      fetch("https://front-test-api.herokuapp.com/api/product")
       .then(res => res.json())
       .then(
         (result) => {
           setProducts(result);
           setProductsList(result);
+          var date = new Date();
+          date.setTime(date.getTime() + 60 * 60 * 1000);
+          localStorage.setItem('expired', date.getTime());
+          localStorage.setItem('prs', JSON.stringify(result));
         },
         (error) => {
           console.log("error", error)
@@ -30,6 +37,13 @@ const ProductListPage = () => {
       ).catch(error => {
         console.log("error", error)
       });
+    } else {
+      console.log("persistencia")
+      var prs = localStorage.getItem('prs');
+      setProducts(JSON.parse(prs));
+      setProductsList(JSON.parse(prs));
+    }
+    
   }, [])
 
 
