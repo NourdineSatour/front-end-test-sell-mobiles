@@ -3,20 +3,26 @@
 .header {
     font-family: Roboto;
     font-weight: 500;
-    font-size: 50px;
+    font-size: 24px;
 
     display: flex;
     background-color: $bg-black;
     &__title {
+        display: flex;
+        flex-direction: column;
         width: 75%;
         color: $primary-white;
         &__link {
+            width: 100%;
             text-decoration: none;
             color: $primary-white;
         }
         &__breadcrumbs {
+            width: 100%;
+            text-decoration: none;
+            color: $primary-white;
             font-weight: 300;
-            font-size: 30px;
+            font-size: 14px;
         }
     }
 
