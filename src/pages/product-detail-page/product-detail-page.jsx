@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
-import "./product-detail-page.scss"
+// import axios from "axios";
+import "./product-detail-page.scss";
 
 const ProductDetailPage = (props) => {
   const params = useParams();
-  const {cookies, setCookies, totalProducts, setTotalProducts, setBreadcrumbs} = props;
+  // const {cookies, setCookies, totalProducts, setTotalProducts, setBreadcrumbs} = props;
+  const { setTotalProducts, setBreadcrumbs} = props;
   const [product, setProduct] = useState({});
   const [storageOptions, setStorageOptions] = useState([]);
   const [colorOptions, setColorOptions] = useState([]);
@@ -23,6 +25,69 @@ const ProductDetailPage = (props) => {
     setColorSelected(value)
   }
 
+  // const handleClick = () => {
+  //   var sendData = JSON.stringify({
+  //     id: product.id,
+  //     colorCode: colorSelected.value,
+  //     storageCode: storageSelected.value
+  //    }) 
+
+  //   // var nameOfCookie = product.id + colorSelected.value + storageSelected.value;
+
+  //   fetch(`https://front-test-api.herokuapp.com/api/cart`, {
+  //     method: 'POST', 
+  //     credentials: 'same-origin',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //   },
+  //     body: sendData
+  //   })
+  //   .then(res => console.log("res", res.headers.get('Cookie')))
+  //   .then(
+  //     (result) => {
+  //       // if(cookies[nameOfCookie]){
+  //       //   setCookies(nameOfCookie, parseInt(cookies[nameOfCookie])+1)
+  //       // } else {
+  //       //   setCookies(nameOfCookie, 1)
+  //       // }
+
+  //       // if(cookies.total){
+  //       //   setCookies("total", parseInt(cookies.total)+1)
+  //       // } else {
+  //       //   setCookies("total", 1)
+  //       // }
+
+  //       setTotalProducts(totalProducts+1);
+        
+  //     },
+  //     (error) => {
+  //       console.log("error", error)
+  //     }
+  //   );
+  // }
+
+
+  // const handleClick = ()=> {
+  //   var sendData = {
+  //         id: product.id,
+  //         colorCode: colorSelected.value,
+  //         storageCode: storageSelected.value
+  //   }
+  //   // document.cookie = "session_id=s%3ABNqSs5J4rLSyguEmrC1zs517hc4U6Yi2.gzyvbZLaDYHdjB5985dWkOxZL7LGEzLFlOhvcXGOE0o";
+  //   var axiosConfig = {
+  //     headers: {
+  //       // "credentials": 'same-origin',
+  //       "withCredentials": true,
+  //         "Cookie": "session_id=s%3ABNqSs5J4rLSyguEmrC1zs517hc4U6Yi2.gzyvbZLaDYHdjB5985dWkOxZL7LGEzLFlOhvcXGOE0o",
+  //     }
+  //   };
+  //   document.cookie = "session_id=s%3ABNqSs5J4rLSyguEmrC1zs517hc4U6Yi2.gzyvbZLaDYHdjB5985dWkOxZL7LGEzLFlOhvcXGOE0o";
+  //   // axios.defaults.withCredentials = true
+  //   axios.post('https://front-test-api.herokuapp.com/api/cart', sendData, axiosConfig )
+  //       .then(response => console.log(response));
+  //     }
+
+
   const handleClick = () => {
     var sendData = JSON.stringify({
       id: product.id,
@@ -30,7 +95,6 @@ const ProductDetailPage = (props) => {
       storageCode: storageSelected.value
      }) 
 
-    var nameOfCookie = product.id + colorSelected.value + storageSelected.value;
 
     fetch(`https://front-test-api.herokuapp.com/api/cart`, {
       method: 'POST', 
@@ -40,23 +104,11 @@ const ProductDetailPage = (props) => {
     },
       body: sendData
     })
-    .then(res => console.log("res", res.headers.get('Cookie')))
+    .then(res => res.json())
     .then(
       (result) => {
-        if(cookies[nameOfCookie]){
-          setCookies(nameOfCookie, parseInt(cookies[nameOfCookie])+1)
-        } else {
-          setCookies(nameOfCookie, 1)
-        }
-
-        if(cookies.total){
-          setCookies("total", parseInt(cookies.total)+1)
-        } else {
-          setCookies("total", 1)
-        }
-
-        setTotalProducts(totalProducts+1);
-        
+        localStorage.setItem("cart", JSON.stringify(result.count));
+        setTotalProducts(result.count);
       },
       (error) => {
         console.log("error", error)
@@ -64,12 +116,12 @@ const ProductDetailPage = (props) => {
     );
   }
 
-
   const formatToSelect = (array) => {
     return array.map(storage =>{ return { value: storage.code, label: storage.name }});
   }
   useEffect(() => {
-    setBreadcrumbs(`Home->${params.idDetail}`);
+    if(product.brand)
+      setBreadcrumbs(`Home->${product.brand} (${product.model})`);
   });
 
   useEffect(() => {
