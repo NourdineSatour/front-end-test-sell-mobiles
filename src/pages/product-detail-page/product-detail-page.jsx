@@ -13,6 +13,7 @@ const ProductDetailPage = (props) => {
   const [storageSelected, setStorageSelected] = useState({});
   const [colorSelected, setColorSelected] = useState({});
   const [disabledButton, setDisabledButton] = useState(true);
+  const goBackText ="<-Atrás";
 
   const handleSelectStorage = (value) => {
     setStorageSelected(value)
@@ -104,8 +105,10 @@ const ProductDetailPage = (props) => {
   return (
     <div className="product-detail-page">      
       <div className="product-detail-page__image">
-        <Link className="product-detail-page__image__title" to="/"> Atrás </Link>
-        <img src={product.imgUrl} alt={product.id} />
+        <Link className="product-detail-page__image__title" to="/">{goBackText}</Link>
+        <div className="product-detail-page__image__container">
+          <img className="product-detail-page__image__container__img" src={product.imgUrl} alt={product.id} />
+        </div>
       </div>
       <div className="product-detail-page__info">
         <div className="product-detail-page__info__description">
@@ -127,9 +130,13 @@ const ProductDetailPage = (props) => {
         <div className="product-detail-page__info__actions">
           <div>Actions:</div>
           <div>Storage</div>
+          <div  className="product-detail-page__info__actions__storage">
           <Select options={storageOptions} value={storageSelected} onChange={handleSelectStorage} />
+          </div>
           <div>Color</div>
+          <div  className="product-detail-page__info__actions__color">
           <Select options={colorOptions} value={colorSelected} onChange={handleSelectColor} />
+          </div>
           </div>
           <div className="product-detail-page__info__wrapper-button">
             <button className="product-detail-page__info__wrapper-button__button" disabled={disabledButton} onClick={handleClick}>Añadir al carro</button>

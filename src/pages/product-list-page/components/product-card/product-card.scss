@@ -3,7 +3,7 @@
 .product-card {
     font-family: Roboto;
     font-weight: 500;
-    font-size: 24px;
+    font-size: 14px;
 
     width: 22%;
     border: 1px $bg-black solid;
@@ -16,6 +16,10 @@
         &__image {
             display: flex;
             justify-content: center;
+            width: 100%;
+            &__img {
+                width: 62%;
+            }
         }
         &__info {
             display: flex;
