@@ -11,15 +11,14 @@ const App = () => {
 
   const [cookies, setCookies] = useCookies();
   const [totalProducts, setTotalProducts] = useState(cookies.total?parseInt(cookies.total):0);
-
-
+  const [breadcrumbs, setBreadcrumbs] = useState("Home")
 
   return (
     <>
-      <Header totalProducts={totalProducts}/>
+      <Header totalProducts={totalProducts} breadcrumbs={breadcrumbs} />
       <Routes>
-        <Route path='/' element={<ProductListPage />} />
-        <Route path='/:idDetail' element={<ProductDetailPage cookies={cookies} setCookies={setCookies} totalProducts={totalProducts} setTotalProducts={setTotalProducts} />} />
+        <Route path='/' element={<ProductListPage setBreadcrumbs={setBreadcrumbs} />} />
+        <Route path='/:idDetail' element={<ProductDetailPage cookies={cookies} setCookies={setCookies} totalProducts={totalProducts} setTotalProducts={setTotalProducts} setBreadcrumbs={setBreadcrumbs} />} />
       </Routes>
     </>
   );
