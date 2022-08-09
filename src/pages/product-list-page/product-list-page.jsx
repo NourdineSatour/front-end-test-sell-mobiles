@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ProductCard from './components/product-card/product-card';
 import './product-list-page.scss';
 
-const ProductListPage = () => {
+const ProductListPage = (props) => {
+  const {setBreadcrumbs} = props;
   
   const [searchValue, setSearchValue] = useState("");
   const [products, setProducts] = useState([]);
@@ -15,7 +16,10 @@ const ProductListPage = () => {
     setProductsList(productsListFiltered);
   }
 
-
+  useEffect(() => {
+    setBreadcrumbs("Home");
+  });
+  
   useEffect(() => {
     var actually = new Date();
     if(localStorage.getItem("expired") === null || actually.getTime()>localStorage.getItem("expired")){

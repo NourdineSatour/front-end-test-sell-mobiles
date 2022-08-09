@@ -6,7 +6,7 @@ import "./product-detail-page.scss"
 
 const ProductDetailPage = (props) => {
   const params = useParams();
-  const {cookies, setCookies, totalProducts, setTotalProducts} = props;
+  const {cookies, setCookies, totalProducts, setTotalProducts, setBreadcrumbs} = props;
   const [product, setProduct] = useState({});
   const [storageOptions, setStorageOptions] = useState([]);
   const [colorOptions, setColorOptions] = useState([]);
@@ -72,7 +72,9 @@ const ProductDetailPage = (props) => {
   const formatToSelect = (array) => {
     return array.map(storage =>{ return { value: storage.code, label: storage.name }});
   }
-
+  useEffect(() => {
+    setBreadcrumbs(`Home->${params.idDetail}`);
+  });
   useEffect(() => {
     fetch(`https://front-test-api.herokuapp.com/api/product/${params.idDetail}`)
       .then(res => res.json())
