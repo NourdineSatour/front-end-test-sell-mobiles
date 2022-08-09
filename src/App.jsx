@@ -18,7 +18,7 @@ const App = () => {
     <>
       <Header totalProducts={totalProducts}/>
       <Routes>
-        <Route path='/' element={<ProductListPage/>} />
+        <Route path='/' element={<ProductListPage />} />
         <Route path='/:idDetail' element={<ProductDetailPage cookies={cookies} setCookies={setCookies} totalProducts={totalProducts} setTotalProducts={setTotalProducts} />} />
       </Routes>
     </>

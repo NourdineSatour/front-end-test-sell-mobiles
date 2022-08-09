@@ -39,7 +39,6 @@ const ProductDetailPage = (props) => {
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': 'session_id=s%3A8aq5IUBPglIz-jXQcrewkp95oikB53Hx.uUnQ6vAarchAP0iU7rT1Q4OGL9AB13lJ3OX9phUF3dQ'
     },
       body: sendData
     })
