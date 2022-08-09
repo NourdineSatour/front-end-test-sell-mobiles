@@ -23,7 +23,6 @@ const ProductListPage = (props) => {
   useEffect(() => {
     var actually = new Date();
     if(localStorage.getItem("expired") === null || actually.getTime()>localStorage.getItem("expired")){
-      console.log("llamada")
       fetch("https://front-test-api.herokuapp.com/api/product")
       .then(res => res.json())
       .then(
@@ -42,10 +41,9 @@ const ProductListPage = (props) => {
         console.log("error", error)
       });
     } else {
-      console.log("persistencia")
-      var prs = localStorage.getItem('prs');
-      setProducts(JSON.parse(prs));
-      setProductsList(JSON.parse(prs));
+      var prs = JSON.parse(localStorage.getItem('prs'));
+      setProducts(prs);
+      setProductsList(prs);
     }
     
   }, [])

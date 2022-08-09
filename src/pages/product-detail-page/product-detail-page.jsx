@@ -32,9 +32,6 @@ const ProductDetailPage = (props) => {
 
     var nameOfCookie = product.id + colorSelected.value + storageSelected.value;
 
-    // localStorage.setItem('session', "ABC");
-    // console.log("localStorage", localStorage);
-
     fetch(`https://front-test-api.herokuapp.com/api/cart`, {
       method: 'POST', 
       credentials: 'same-origin',
@@ -46,7 +43,6 @@ const ProductDetailPage = (props) => {
     .then(res => console.log("res", res.headers.get('Cookie')))
     .then(
       (result) => {
-        console.log(result)
         if(cookies[nameOfCookie]){
           setCookies(nameOfCookie, parseInt(cookies[nameOfCookie])+1)
         } else {
@@ -75,11 +71,20 @@ const ProductDetailPage = (props) => {
   useEffect(() => {
     setBreadcrumbs(`Home->${params.idDetail}`);
   });
+
   useEffect(() => {
-    fetch(`https://front-test-api.herokuapp.com/api/product/${params.idDetail}`)
+    var actually = new Date();
+
+    if(localStorage.getItem(`expired${params.idDetail}`) === null || actually.getTime()>localStorage.getItem(`expired${params.idDetail}`)) {
+      fetch(`https://front-test-api.herokuapp.com/api/product/${params.idDetail}`)
       .then(res => res.json())
       .then(
         (result) => {
+          var date = new Date();
+          date.setTime(date.getTime() + 60 * 60 * 1000);
+          localStorage.setItem(`expired${params.idDetail}`, date.getTime());
+          localStorage.setItem(`pr${params.idDetail}`, JSON.stringify(result));
+
           setStorageOptions(formatToSelect(result.options.storages));
           if(result.options.storages.length === 1)
             setStorageSelected(formatToSelect(result.options.storages)[0])
@@ -94,6 +99,17 @@ const ProductDetailPage = (props) => {
       ).catch(error => {
         console.log("error", error)
       });
+    } else {
+      var pr = JSON.parse(localStorage.getItem(`pr${params.idDetail}`));
+      setStorageOptions(formatToSelect(pr.options.storages));
+      if(pr.options.storages.length === 1)
+        setStorageSelected(formatToSelect(pr.options.storages)[0])
+      setColorOptions(formatToSelect(pr.options.colors));
+      if(pr.options.colors.length === 1)
+        setColorSelected(formatToSelect(pr.options.colors)[0])
+      setProduct(pr);
+    }
+    
   }, [params.idDetail])
 
 
