@@ -7,12 +7,16 @@ const Header = (props) => {
   return (
     <div className="header">
       <div className="header__title">
-        <Link className="header__title__link" to="/">
-          Zara Mobile
-        </Link>
-        <Link className="header__title__link" to="/">
-          <div className="header__title__breadcrumbs">{breadcrumbs}</div>
-        </Link>
+        <div>
+          <Link className="header__title__link" to="/">
+            Zara Mobile
+          </Link>
+        </div>
+        <div>
+          <Link className="header__title__breadcrumbs" to="/">
+            {breadcrumbs}
+          </Link>
+        </div>
       </div>
       <div className="header__cart">{totalProducts}</div>
     </div>

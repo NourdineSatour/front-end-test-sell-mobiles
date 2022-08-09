@@ -8,13 +8,19 @@
     display: flex;
     background-color: $bg-black;
     &__title {
+        display: flex;
+        flex-direction: column;
         width: 75%;
         color: $primary-white;
         &__link {
+            width: 100%;
             text-decoration: none;
             color: $primary-white;
         }
         &__breadcrumbs {
+            width: 100%;
+            text-decoration: none;
+            color: $primary-white;
             font-weight: 300;
             font-size: 14px;
         }
