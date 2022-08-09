@@ -3,10 +3,10 @@
 .product-list-page {
     font-family: Roboto;
     font-weight: 500;
-    font-size: 50px;
+    font-size: 32px;
 
     background-color: $bg-dark-gray;
-    margin: 10% 10% 10% 10%;
+    margin: 4% 5% 4% 5%;
     &__header {
         display: flex;
         &__title {
@@ -15,7 +15,7 @@
         }
         &__search {
             width: 25%;
-            font-size: 20px;
+            font-size: 14px;
             margin: 9px;
         }
     }

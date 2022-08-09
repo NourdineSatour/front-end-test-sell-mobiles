@@ -3,12 +3,11 @@
 .product-detail-page {
     font-family: Roboto;
     font-weight: 500;
-    font-size: 24px;
 
     display: flex;
+    align-items: flex-start;
     background-color: $bg-dark-gray;
-    margin: 10% 10% 10% 10%;
-
+    margin: 4% 5% 4% 5%;
     &__image {
         width: 50%;
         display: flex;
@@ -18,8 +17,16 @@
             text-decoration: none;
             color: $text-black;
             font-weight: 700;
-            font-size: 34px;
+            font-size: 18px;
             margin: 2% 2% 2% 2% ;
+        }
+        &__container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            &__img{
+                width: 30%;
+            }
         }
     }
     &__info {
@@ -27,21 +34,31 @@
         &__description {
             &__title {
                 font-weight: 700;
-                font-size: 34px;
+                font-size: 18px;
             }
             &__text {
                 font-weight: 700;
-                font-size: 24px;
+                font-size: 12px;
             }
         }
         &__wrapper-button {
             display: flex;
             justify-content: flex-end;
             &__button {
-                font-size: 24px;
+                font-size: 16px;
                 margin: 10px;
             }
     
+        }
+        &__actions {
+            &__storage{
+                width: 50%;
+                font-size: 12px;
+            }
+            &__color{
+                width: 50%;
+                font-size: 12px;
+            }
         }
     }
     
